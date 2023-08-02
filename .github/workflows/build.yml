@@ -1,8 +1,8 @@
 name: build
 
-on: 
+on:
   push:
-    paths: 
+    paths:
       - build/**
       - .github/workflows/build.yml
 
@@ -32,12 +32,12 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: ./build/plugin_lua53/**/*
-          name: plugin_lua53   
+          name: plugin_lua53
       - name: UploadJit
         uses: actions/upload-artifact@v2
         with:
           path: ./build/plugin_luajit/**/*
-          name: plugin_luajit 
+          name: plugin_luajit
   ios:
     runs-on: macos-latest
 
@@ -47,7 +47,7 @@ jobs:
         run: |
           cd build
           ./make_ios_luajit.sh
-      
+
       - name: UploadJit
         uses: actions/upload-artifact@v2
         with:
@@ -68,48 +68,48 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: ./build/plugin_luajit/**/*
-          name: plugin_luajit  
+          name: plugin_luajit
   windows:
     runs-on: windows-2019
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Insatll MSVC
         uses: microsoft/setup-msbuild@v1.0.2
-      
+
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Build Luajit
         run: |
           cd build
-          .\make_win64_luajit.bat  
+          .\make_win64_luajit.bat
       - name: UploadJit
         uses: actions/upload-artifact@v2
         with:
           path: ./build/plugin_luajit/**/*
           name: plugin_luajit
-          
+
   windows-luajit-32:
-    runs-on: windows-2019
+    runs-on: windows-2020
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Insatll MSVC
         uses: microsoft/setup-msbuild@v1.0.2
-      
+
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x86
       - name: Build Luajit
         run: |
           cd build
-          .\make_win32_luajit.bat  
+          .\make_win32_luajit.bat
       - name: UploadJit
         uses: actions/upload-artifact@v2
         with:
           path: ./build/plugin_luajit/**/*
           name: plugin_luajit
-    
 
-   
+
+
